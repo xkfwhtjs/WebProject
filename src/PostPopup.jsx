@@ -1,4 +1,4 @@
-// 📁 src/PostPopup.jsx
+
 import React from 'react';
 
 export default function PostPopup({ post, onClose, onEdit, onDelete }) {
