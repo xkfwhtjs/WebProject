@@ -1,7 +1,6 @@
-// 📁 src/friendService.js
 import { supabase } from './supabaseClient';
 
-// ✅ 친구 ID 목록 가져오기 (유지)
+//  친구 ID 목록 가져오기 (유지)
 export async function getFriendIds(userId) {
   const { data, error } = await supabase
     .from('friends')
@@ -17,7 +16,7 @@ export async function getFriendIds(userId) {
   return data ? data.map(f => f.friend_id) : [];
 }
 
-// ✅ 친구 게시글 가져오기 (유지)
+// 친구 게시글 가져오기 (유지)
 export async function getPostsFromFriends(friendIds) {
   if (friendIds.length === 0) return [];
 
@@ -69,7 +68,7 @@ export async function addFriend(userId, friendId) {
   return true;
 }
 
-// ✅ 🔥 추가: 친구 이메일 리스트 가져오기
+//추가: 친구 이메일 리스트 가져오기
 export async function getFriendEmails(userId) {
   const friendIds = await getFriendIds(userId);
 
