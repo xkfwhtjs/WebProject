@@ -45,7 +45,7 @@ export default function HomePage() {
   if (user) fetchMessages();
 }, [user]);
 
-  // 1. 유저 정보 가져오기
+  // 유저 정보 가져오기
   useEffect(() => {
     const fetchUser = async () => {
       const { data: { user }, error } = await supabase.auth.getUser();
@@ -54,7 +54,7 @@ export default function HomePage() {
     fetchUser();
   }, []);
 
-  // 2. 유저가 확인되면 모든 데이터 로딩
+  // 유저가 확인되면 모든 데이터 로딩
   useEffect(() => {
     const fetchAllData = async () => {
       if (!user) return;
@@ -124,9 +124,9 @@ const handleDeletePost = async (postId) => {
   }
 };
 
-// 수정 처리 → PostCreator를 수정 모드로 재사용할 수 있게 할 예정
+// 수정 처리 
 const handleEdit = (post) => {
-  setPopupPost(null); // 기존 팝업 닫기
+  setPopupPost(null);
   setShowPostCreator({
     mode: 'edit',
     postData: post,
@@ -139,10 +139,10 @@ const handleSendMessage = async () => {
     return;
   }
 
-  // 1. 입력한 이메일로 Supabase에서 사용자 UUID 조회
+  // 입력한 이메일로 Supabase에서 사용자 UUID 조회
   const { data: targetUser, error: targetError } = await supabase
-    .from('email') // ← 여기에 email-uuid 매핑 테이블명 입력
-    .select('id')   // ← 해당 테이블에서 uuid 컬럼
+    .from('email')
+    .select('id')  
     .eq('email', messageSender)
     .single();
 
@@ -151,7 +151,7 @@ const handleSendMessage = async () => {
     return;
   }
 
-  // 2. 현재 로그인한 사용자 정보 가져오기
+  // 현재 로그인한 사용자 정보 가져오기
   const { data: sessionData, error: userError } = await supabase.auth.getUser();
   const currentUser = sessionData?.user;
   if (userError || !currentUser) {
@@ -382,7 +382,7 @@ const handleSendMessage = async () => {
         </div>
       </div>
 
-      {/* 팝업 영역들 (가장 아래에 위치) */}
+      {/* 팝업  */}
       {showPostCreator && user && (
         <PostCreator
           userId={user.id}
@@ -404,7 +404,7 @@ const handleSendMessage = async () => {
     onEdit={(post) => {
       setPopupPost(null);
       setShowPostCreator(true);
-      setEditingPost(post); // 수정용 상태 따로 생성
+      setEditingPost(post); // 수정용 상태
     }}
     onDelete={async (postId) => {
       const { error } = await supabase.from('post').delete().eq('id', postId);
@@ -516,11 +516,11 @@ const handleSendMessage = async () => {
 
   const { error } = await supabase.from('messages').insert([
     {
-      sender: user.email,               // ✅ 로그인 유저 이메일
+      sender: user.email,               // 로그인 유저 이메일
       title: messageTitle,
       content: messageContent,
-      receiver_id: receiver.id,         // ✅ uuid 타입
-      created: new Date(),              // ✅ 수동 삽입 (권장)
+      receiver_id: receiver.id,       
+      created: new Date(),            
     },
   ]);
 
