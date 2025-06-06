@@ -44,7 +44,7 @@ export default function FriendAdder({ onFriendAdded }) {
     } else {
       setStatus('친구 추가 성공!');
       setFriendEmail('');
-      if (onFriendAdded) await onFriendAdded(); // ✅ 핵심 추가
+      if (onFriendAdded) await onFriendAdded();
     }
   };
 
