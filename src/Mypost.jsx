@@ -1,4 +1,4 @@
-// 📁 src/MyPosts.jsx
+
 import React, { useEffect, useState } from 'react';
 import { supabase } from './supabaseClient';
 
