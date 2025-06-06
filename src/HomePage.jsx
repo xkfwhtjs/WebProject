@@ -36,7 +36,7 @@ export default function HomePage() {
     const { data: messages, error } = await supabase
       .from('messages')
       .select('*')
-      .eq('user_id', userData.user.id)
+      .eq('receiver_id', userData.user.id)
       .order('created', { ascending: false });
 
     if (!error) setMessages(messages);
