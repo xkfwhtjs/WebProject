@@ -22,7 +22,7 @@ export default function MessageList() {
       const { data, error } = await supabase
         .from('messages')
         .select('*')
-        .eq('receiver_id', user.id) // ✅ 받은 쪽지 필터링
+        .eq('receiver_id', user.id) //  받은 쪽지 필터링
         .order('created', { ascending: false });
 
       if (!error && data) setMessages(data);
